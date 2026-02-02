@@ -7,7 +7,7 @@ import numpy as np
 
 sys.setrecursionlimit(
     2000000
-)  # Set it higher ( no optimize, but at least, get the job done)
+)  # Set higher recursion depth for the big dataset ( no optimize, but at least, get the job done)
 
 
 # wrapper function use for time calculating
@@ -112,7 +112,7 @@ def merge_sort(array):
     return:
         res is a sorted list of elements in ascending order
     """
-    # we have to call the helper to hide away from the benchmark decorator 
+    # we have to call the helper to hide away from the benchmark decorator
     res = _merge_sort(array)
     return res
 
@@ -161,7 +161,7 @@ def quicksort(array):
 
 def _quicksort(array):
     """
-    Quick sort helper function 
+    Quick sort helper function
     args:
         array is a list of elements
     return:
@@ -174,13 +174,13 @@ def _quicksort(array):
     if len(array) == 1:
         return array
 
-    # we always choose the latest
-    pivot_index = len(array) // 2
-    pivot = array[pivot_index]  # we take the last element of the array is the pivot
+    # chose random to minmize the worst case of quicksort
+    pivot_index = random.randint(0, len(array) - 1)
+    pivot = array[pivot_index]
     left_array = []
     right_array = []
 
-    for i in range(len(array)):  # we travel to the -2 element
+    for i in range(len(array)):
         if i == pivot_index:
             continue
 
@@ -198,7 +198,7 @@ def _quicksort(array):
 
 
 def reorder_min_single_node(array, root_index):
-    """ 
+    """
     Reorder a single node in the min heap. If the node is larger than any of its children, swap it with the smallest child and continue reordering downwards.
     args:
         array is a list of elements
@@ -272,14 +272,13 @@ def heap_sort(array):
 
 def experiment():
     """
-    Experiment function to compare the sorting algorithms on datasets from a file. This function is designed 
+    Experiment function to compare the sorting algorithms on datasets from a file. This function is designed
     to read datasets from 'dataset.txt', apply multiple sorting algorithms, and verify that they all produce the same sorted output.
     args:
         None
     return:
         None
     """
-
 
     filename = "dataset.txt"
 
